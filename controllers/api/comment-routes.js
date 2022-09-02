@@ -3,7 +3,7 @@ const { Comments } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-    Comment.findAll()
+    Comments.findAll()
       .then(dbCommentData => res.json(dbCommentData))
       .catch(err => {
         console.log(err);
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   });
   
   router.post('/', withAuth, (req, res) => {
-    Comment.create({
+    Comments.create({
       comment_text: req.body.comment_text,
       user_id: req.session.user_id,
       post_id: req.body.post_id
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
   });
   
   router.delete('/:id', withAuth, (req, res) => {
-    Comment.destroy({
+    Comments.destroy({
       where: {
         id: req.params.id
       }

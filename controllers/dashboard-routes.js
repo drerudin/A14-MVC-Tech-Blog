@@ -1,11 +1,16 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
+const { Post, User, Comments } = require('../models');
 
-// get all posts for homepage
-router.get('/', (req, res) => {
+// get all posts for dashboard
+router.get('/', withAuth, (req, res) => {
     console.log('======================');
     Post.findAll({
+        where: {
+            // use the ID from the session
+            user_id: req.session.user_id
+        },
         attributes: [
             'id',
             'title',
@@ -14,7 +19,7 @@ router.get('/', (req, res) => {
         ],
         include: [
             {
-                model: Comment,
+                model: Comments,
                 attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
@@ -30,7 +35,7 @@ router.get('/', (req, res) => {
         .then(dbPostData => {
             // serialize data before passing to template
             const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+            res.render('dashboard', { posts, loggedIn: true });
         })
         .catch(err => {
             console.log(err);
@@ -39,7 +44,7 @@ router.get('/', (req, res) => {
 });
 
 // get one post
-router.get('/post/:id', (req, res) => {
+router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
             id: req.params.id
@@ -52,7 +57,7 @@ router.get('/post/:id', (req, res) => {
         ],
         include: [
             {
-                model: Comment,
+                model: Comments,
                 attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
@@ -75,22 +80,15 @@ router.get('/post/:id', (req, res) => {
             const post = dbPostData.get({ plain: true });
 
             // pass data to template
-            res.render('single-post', { post, loggedIn: req.session.loggedIn });
+            res.render('edit-post', {
+                post,
+                loggedIn: true
+            });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
-});
-
-// login
-router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-
-    res.render('login');
 });
 
 module.exports = router;
