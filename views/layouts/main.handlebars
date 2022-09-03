@@ -30,15 +30,15 @@
   
     <div class = "wrapper">
       <header>
-        <h1>
-          <a href="/">Home</a>
-        </h1>
         <nav>
+        <ul>
+         <li><a href="/">Home</a></li>
+        
           {{#if loggedIn}}
-          <a href="/dashboard">Dashboard</a>
-          <a href="/logout">Logout</a>
+         <li> <a href="/dashboard">Dashboard</a></li>
+         <li> <a href="/logout">Logout</a></li>
           {{else}}
-          <a href="/login">Login</a>
+         <li> <a href="/login">Login</a> </li>
           {{/if}}
         </nav>
       </header>
