@@ -2,13 +2,15 @@
     <div class="full-post">
         <div class="content">
         <div class="title">
-            <a href="/post/{{id}}" class="ref"><h2>{{title}}</h2></a>
+            <a href="/post/{{id}}" class="ref">{{title}}</a>
         </div>
         <div class="creator">
-            <p id="creator">Created by: {{creator}}</p>
+            <p id="created-by">
+                Created by: <b>{{user.username}}</b> on <b>{{format_date created_at}}</b>
+                </p>
         </div>
     </div>>
-    <div class="meta">
+    <div class="content-article">
         <p>{{content}}</p>
     </div>
     </div>

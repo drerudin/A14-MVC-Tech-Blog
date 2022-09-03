@@ -1,25 +1,26 @@
-{{> post-info post }}
 
-{{#if loggedIn }}
-<form class="new-post-form">
-  <div>
-    <label for="title">title:</label>
-    <input type="text" id="title" />
-  </div>
-  <div>
-    <label for="content">content:</label>
-    <textarea id="content"></textarea>
-  </div>
-  <div>
-    <button type="submit">create post</button>
-  </div>
+<a href="/dashboard" class="backup"> &larr; Back to dashboard</a>
+<br>
+<br>
+
+
+{{> post-info post}}
+
+{{#if loggedIn}}
+<form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
+    </div>
+
+    <div>
+        <button type="submit">Add Comment</button>
+    </div>
 </form>
 {{/if}}
 
-{{> comments post.comments }}
+{{> comments post.comments}}
 
-{{#if loggedIn }}
+
+{{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
 {{/if}}
-
-{{#if loggedIn }}
