@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comments } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const sequelize = require('../../config/connection');
 
@@ -7,13 +7,14 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
+            'content',
             'title',
             'created_at',
-            'username'
         ],
+        order: [['created_at', 'DESC']],
         include: [
             {
-                model: Comments,
+                model: Comment,
                 attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
@@ -43,13 +44,13 @@ router.get('/post/:id', (req, res) => {
         },
         attributes: [
             'id',
+            'content',
             'title',
             'created_at',
-            'username'
         ],
         include: [
             {
-                model: Comments,
+                model: Comment,
                 attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
@@ -83,6 +84,31 @@ router.post('/', withAuth, (req, res) => {
         user_id: req.session.user_id
     })
         .then(dbPostData => res.json(dbPostData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+router.put('/:id', withAuth, (req, res) => {
+    Post.update(
+        {
+            title: req.body.title,
+            post_text: req.body.post_text
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    )
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+            res.json(dbPostData);
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
