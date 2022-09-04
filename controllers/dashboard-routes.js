@@ -92,7 +92,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-    res.render('new-post', {
+    res.render('add-post', {
         loggedIn: true
     });
 });

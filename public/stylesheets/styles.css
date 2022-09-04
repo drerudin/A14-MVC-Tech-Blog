@@ -15,7 +15,7 @@ main, .site-name {
 }
 
 a, .btn-primary, #created-by {
-    color: #b9cba2;
+    color: #050802;
 }
 
 a:hover, .btn-primary:hover {
@@ -183,7 +183,7 @@ main {
 .post .title span {
     font-style: italic;
     font-size: 90%;
-    color: #7d7d7d;
+    color: #0a0101;
 }
 
 .edit-link {
@@ -240,7 +240,7 @@ main {
 
 .form-heading h1,
 .form-heading h2 {
-    color: #b8cba2;
+    color: #11160c;
 }
 
 .login-form,
