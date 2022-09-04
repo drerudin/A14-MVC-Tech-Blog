@@ -28,28 +28,31 @@
   </head>
 
   
-    <div class = "wrapper">
-      <header>
-        <nav>
-        <ul>
-         <li><a href="/">Home</a></li>
-        
+<div class = "wrapper">
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
           {{#if loggedIn}}
-         <li> <a href="/dashboard">Dashboard</a></li>
-         <li> <a href="/logout" class="btn-no-style logout" id="logout">Logout</a></li>
+        <li> <a href="/dashboard">Dashboard</a></li>
+        <li> <a href="/logout" class="btn-no-style logout" id="logout">Logout</a></li>
           {{else}}
-         <li> <a href="/login">Login</a> </li>
+        <li> <a href="/login">Login</a> </li>
           {{/if}}
-        </nav>
-      </header>
-      <div class="site-strip">
-        <div class="site-name">
+      </ul>
+    <div class="site-strip">
+      <div class="site-name">
         <h1>The Tech Blog</h1>
-        </div>
       </div>
-        <main>
-          {{{ body }}}
-        </main>
+    </div>
+    </nav>
+  </header>
+  
+  
+  <!-- BODY -->
+  <main>
+    {{{ body }}}
+  </main>
     </div>
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>

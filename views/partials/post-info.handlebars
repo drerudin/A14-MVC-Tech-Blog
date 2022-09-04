@@ -1,17 +1,20 @@
 <article class="post">
-    <div class="full-post">
-        <div class="content">
-        <div class="title">
-            <a href="/post/{{id}}" class="ref">{{title}}</a>
-        </div>
+  <div class="full-post">
+    <div class="content">
+      <div class="title">
         <div class="creator">
-            <p id="created-by">
-                Created by: <b>{{user.username}}</b> on <b>{{format_date created_at}}</b>
-                </p>
+        
+        <a href="/post/{{id}}" class="ref">{{title}}</a>
+            <div id="created-by">Created by:
+            <b>{{user.username}}</b>
+            on
+            <b>{{format_date created_at}}</b>
+            </div>
         </div>
+      </div>
     </div>
     <div class="content-article">
-        <p>{{content}}</p>
+      <p>{{content}}</p>
     </div>
-    </div>
-    </article>
+  </div>
+</article>

@@ -1,13 +1,12 @@
 <section class="new-post">
-    <button type="submit" class="btn" id="create-post">Create Post</button>
+    <button type="submit" class="btn" id="create-post">+Create Post</button>
 </section>
 
 {{#if posts.length }}
 <section>
-    <h2>Your Posts</h2>
     <ul class="posts">
         {{#each posts as |post|}}
-        <li>
+        <li class="single-post">
             {{> post-info post }}
             <a href="/dashboard/edit/{{post.id}}" class="edit-post-form">Edit</a>
         </li>
