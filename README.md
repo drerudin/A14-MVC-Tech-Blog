@@ -22,3 +22,4 @@ https://github.com/drerudin/A14-MVC-Tech-Blog
 
 # Screenshots
 
+![image](https://user-images.githubusercontent.com/99576524/188300994-80ea7c33-187d-4916-8123-3ea2209c5791.png)
